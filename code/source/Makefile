@@ -14,7 +14,7 @@ LD_FLAGS = -L /usr/local/lib -l $(GOOGLE_TEST_LIB) -l pthread
 ODIR=obj
 LDIR =../lib
 
-TEST_NAME = testa_Nlinhas
+TEST_NAME = Testa_Nlinhas
 
 _DEPS = Nlinhas.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
