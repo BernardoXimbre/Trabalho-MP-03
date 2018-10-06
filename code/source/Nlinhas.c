@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "pilha.h"
+#include "Nlinhas.h"
 
 #define EMPTY -1
 

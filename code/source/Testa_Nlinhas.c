@@ -1,5 +1,5 @@
 #include <gtest/gtest.h> // googletest header file
-#include "pilha.h"
+#include "Nlinhas.h"
 
 #define StackSizeNull 0
 #define StackSizeNegative -10
