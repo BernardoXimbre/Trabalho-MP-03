@@ -14,15 +14,16 @@ LD_FLAGS = -L /usr/local/lib -l $(GOOGLE_TEST_LIB) -l pthread
 ODIR=obj
 LDIR =../lib
 
-TEST_NAME = Testa_Nlinhas
+TEST_PROGRAM = Testa_Nlinhas
+NAME_PROGRAM = Nlinhas
 
-_DEPS = Nlinhas.h
+_DEPS = $(NAME_PROGRAM).h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = Nlinhas.o Testa_Nlinhas.o
+_OBJ = $(NAME_PROGRAM).o $(TEST_PROGRAM).o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-$(TEST_NAME): $(OBJ)
+$(TEST_PROGRAM): $(OBJ)
 	$(CC) $(VALGRIND) -o $@ $(GCOV) $^ $(LD_FLAGS) $(CFLAGS)
 
 $(ODIR)/%.o: %.c $(DEPS)
@@ -31,4 +32,4 @@ $(ODIR)/%.o: %.c $(DEPS)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.* ../source/$(TEST_NAME) core $(INCDIR)/*~
+	rm -f $(ODIR)/*.* ../source/$(TEST_PROGRAM) core $(INCDIR)/*~
