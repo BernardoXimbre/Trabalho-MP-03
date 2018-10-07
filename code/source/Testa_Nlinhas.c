@@ -1,4 +1,4 @@
-#include <gtest/gtest.h> // googletest header file
+#include "gtest/gtest.h"
 #include "Nlinhas.h"
 
 #define StackSizeNull 0
@@ -7,7 +7,7 @@
 #define StackElement 675
 
 int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv); 
+::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
 

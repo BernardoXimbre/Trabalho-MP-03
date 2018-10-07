@@ -1,4 +1,4 @@
-digraph "Graph Legend"
+digraph "Legenda do Grafo"
 {
  // INTERACTIVE_SVG=YES
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
