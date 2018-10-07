@@ -7,6 +7,7 @@ CC=g++
 CFLAGS=-I$(IDIR)
 GCOV = -ftest-coverage -fprofile-arcs
 VALGRIND = -g
+CPPLINT = cpplint
 
 G++_FLAGS = -I $(GOOGLE_TEST_INCLUDE)
 LD_FLAGS = -L /usr/local/lib -l $(GOOGLE_TEST_LIB) -l pthread
@@ -27,9 +28,7 @@ $(TEST_PROGRAM): $(OBJ)
 	$(CC) $(VALGRIND) -o $@ $(GCOV) $^ $(LD_FLAGS) $(CFLAGS)
 
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) $(VALGRIND) -c -o $@ $(GCOV) $(G++_FLAGS) $< $(CFLAGS) 
-
-.PHONY: clean
-
+	$(CC) $(VALGRIND) -c -o $@ $(GCOV) $(G++_FLAGS) $< $(CFLAGS)
+	
 clean:
 	rm -f $(ODIR)/*.* ../source/$(TEST_PROGRAM) core $(INCDIR)/*~
