@@ -7,10 +7,9 @@ int main(int argc, char **argv) {
 ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-/*
-TEST(Stack, CreateStackSizeNull) {
-    Structure_Stack * stack = CreateStack(StackSizeNull);
-    ASSERT_EQ(StackSizeNull, Size(stack));
-    DestroyStack(stack);
+
+TEST(QUANTIDADE_DE_LINHAS, sem_linhas_e_comentarios) {
+    char name[]="sem_linhas_e_comentarios";
+    ASSERT_EQ(0, Nline(name));
 }
-*/
+
