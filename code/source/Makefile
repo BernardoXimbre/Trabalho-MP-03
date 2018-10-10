@@ -34,11 +34,6 @@ $(TEST_PROGRAM): $(OBJ)
 	
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $(G++_FLAGS) $< $(CFLAGS)
-
-$(CPPLINT):
-	
-
-gcov:
 	
 clean:
 	rm -f $(ODIR)/*.* $(TEST_PROGRAM) core $(INCDIR)/*~

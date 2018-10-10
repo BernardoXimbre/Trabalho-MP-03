@@ -25,23 +25,27 @@
 ****************************************************************************/ 
 int Nline(char nome_programa[]) {
     FILE *file;
-    char caractere;
+    char char_current, char_back;
     int numero_linhas;
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-    for (numero_linhas= 0 ; (caractere = Readchar(file)) != EOF;) {
-        if (caractere == '/') {
-            if ( (caractere = Readchar(file)) == '*') {
-                Comentario_Barra_Asterisco(file);
+    for (numero_linhas = 0 ; (char_current = fgetc(file)) != EOF;) {
+        if (char_current == '/') {
+            if ((char_current = fgetc(file)) == '*') {
+                for (char_back ='0'; ; char_current = fgetc(file)) {
+                    if (char_current == '/' && char_back == '*') {
+                        break;
+                    }
+                    char_back = char_current;
+                }
             }
         }
-        
         /*if (fgetc(file) == '/') {
             if (fgetc(file) == '/') {
                 do {
-                    caractere = fgetc(file);
-                } while (caractere!= '\0');
+                    char_current = fgetc(file);
+                } while (char_current!= '\0');
             }
         }*/
     }/* for */
@@ -64,9 +68,6 @@ int Nline(char nome_programa[]) {
 *   return = EOF 
 *   return = char 
 ****************************************************************************/ 
-char ReadChar(FILE* file) {
-    return fgetc(file);
-}
 /***************************************************************************
 * Função: Comentario_Barra_Asterisco
 * Descrição
@@ -81,11 +82,4 @@ char ReadChar(FILE* file) {
 *   não possui retorno 
 ****************************************************************************/ 
 void Comentario_Barra_Asterisco(FILE* file) {
-    while (Readchar(file) != EOF) {
-        if (Readchar(file) == '*') {
-            if (Readchar(file) == '/') {
-                break;
-            }
-        }/* if */
-    }/* while */
 }

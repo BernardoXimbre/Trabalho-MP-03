@@ -1,5 +1,4 @@
 // "Copyright [2018] <Copyright Owner>"  [legal/copyright]
-
 /***************************************************************************
 * Função: Contar numero de linhas de arquivo C++
 * Descrição
@@ -13,4 +12,4 @@
 *   retorna n   o programa possuir linhas válidas.
 * Assertiva de entrada
 *   nome_programa == String
-****************************************************************************/
+***************************************************************************/
