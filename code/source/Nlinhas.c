@@ -25,22 +25,22 @@
 ****************************************************************************/ 
 int Nline(char nome_programa[]) {
     FILE *file;
-    int n_line = 0;
+    int n_line = 1;
     char char_next, char_back;
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-    char_back = fgetc(file);
     char_next = fgetc(file);
-    for (; char_back != EOF; char_back = fgetc(file), char_next = fgetc(file)) {
-        if (char_back == '\n') {
+    char_back = char_next;
+    for (; char_next != EOF; char_back = char_next, char_next = fgetc(file)) {
+        if (char_back == '\n' && char_next != '\n') {
+            n_line+=1;
+        } else if (char_back == '\n' && char_next == '\n') {
             Espaco_em_branco(file);
         } else if (char_back == '/' && char_next == '*') {
             Comentario_Barra_Asterisco(file);
         } else if (char_back == '/' && char_next == '/') {
             Comentario_Barra_Barra(file);
-        } else {
-            n_line++;
         }
     }
     fclose(file);
