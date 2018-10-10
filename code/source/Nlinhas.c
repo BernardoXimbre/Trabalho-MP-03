@@ -30,12 +30,16 @@ int Nline(char nome_programa[]) {
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-
-    for (char_next = '0'; char_next != EOF; char_next = fgetc(file)) {
-        Comentario_Barra_Asterisco(file);
-        // Espaco_em_branco(file);
-    }/* for */
-
+    for (char_next = fgetc(file); char_next != EOF; char_next = fgetc(file)) {
+        if (char_next == '\n') {
+            Espaco_em_branco(file);
+        } else if (char_next == '/' && (char_next = fgetc(file)) == '*') {
+            Comentario_Barra_Asterisco(file);
+        } else if ()
+        } else {
+            n_line++;
+        }
+    }
     fclose(file);
     return n_line;
 }
@@ -46,27 +50,19 @@ int Nline(char nome_programa[]) {
 * Parâmetros
 *   file - ponteiro do tipo FILE.
 * Valor retornado
-*   retorna int
+*   retorna void
 * Assertiva de entrada
 *   nome_arquivo == file
 * Assertiva de saída
-*   retorna um inteiro que é o numero de espaços em branco ate o \0.
+*   retorna uma nova posiçao do ponteiro file onde acaba a linha em branco.
 ****************************************************************************/ 
-int Espaco_em_branco(FILE* file) {
-    int espaco_branco;
+void Espaco_em_branco(FILE* file) {
     char char_next;
-    if ((char_next = fgetc(file)) == ' ') {
-        for (espaco_branco = 0; ; espaco_branco++) {
-            char_next = fgetc(file);
-            if (char_next != ' ') {
-                return 0;
-            }/* if */
-            if (char_next == '\0') {
-                return espaco_branco;
-            }/* if */
-        }/* for */
-    }
-    return 0;
+    for (char_next = fgetc(file); ; char_next = fgetc(file)) {
+        if (char_next != ' ' && char_next != '\n') {
+            return;
+        }/* if */
+    }/* for */
 }
 /***************************************************************************
 * Função: Comentario_Barra_Asterisco
@@ -83,15 +79,10 @@ int Espaco_em_branco(FILE* file) {
 ****************************************************************************/ 
 void Comentario_Barra_Asterisco(FILE* file) {
     char char_next, char_back;
-
-    if ((char_next = fgetc(file)) == '/') {
-        if ((char_next = fgetc(file)) == '*') {
-            for (char_back = '0'; ; char_next = fgetc(file)) {
-                if (char_back == '*' && char_next == '/') {
-                    break;
-                }
-                char_back = char_next;
-            }/* for */
-        }/* if */
-    }/* if */
+    for (char_back = '0', char_next = fgetc(file); ; char_next = fgetc(file)) {
+        if (char_back == '*' && char_next == '/') {
+            break;
+        }
+        char_back = char_next;
+    }/* for */
 }

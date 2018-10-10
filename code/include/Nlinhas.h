@@ -5,6 +5,6 @@
 
 int Nline(char nome_programa[]);
 void Comentario_Barra_Asterisco(FILE* file);
-int Espaco_em_branco(FILE* file);
+void Espaco_em_branco(FILE* file);
 
 #endif  // TRABALHO_MP_03_CODE_INCLUDE_NLINHAS_H_
