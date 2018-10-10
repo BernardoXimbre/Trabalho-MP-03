@@ -26,16 +26,19 @@
 int Nline(char nome_programa[]) {
     FILE *file;
     int n_line = 0;
-    char char_next;
+    char char_next, char_back;
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-    for (char_next = fgetc(file); char_next != EOF; char_next = fgetc(file)) {
-        if (char_next == '\n') {
+    char_back = fgetc(file);
+    char_next = fgetc(file);
+    for (; char_back != EOF; char_back = fgetc(file), char_next = fgetc(file)) {
+        if (char_back == '\n') {
             Espaco_em_branco(file);
-        } else if (char_next == '/' && (char_next = fgetc(file)) == '*') {
+        } else if (char_back == '/' && char_next == '*') {
             Comentario_Barra_Asterisco(file);
-        } else if ()
+        } else if (char_back == '/' && char_next == '/') {
+            Comentario_Barra_Barra(file);
         } else {
             n_line++;
         }
@@ -84,5 +87,26 @@ void Comentario_Barra_Asterisco(FILE* file) {
             break;
         }
         char_back = char_next;
+    }/* for */
+}
+/***************************************************************************
+* Função: Comentario_Barra_Barra
+* Descrição
+*   Lê um comentário do tipo // do arquivo até o final da linha.
+* Parâmetros
+*   file - ponteiro do tipo FILE.
+* Valor retornado
+*   retorna void
+* Assertiva de entrada
+*   nome_arquivo == file
+* Assertiva de saída
+*   retorna uma nova posiçao do ponteiro file onde acaba a linha.
+****************************************************************************/ 
+void Comentario_Barra_Barra(FILE* file) {
+    char char_next;
+    for (char_next = fgetc(file); ; char_next = fgetc(file)) {
+        if (char_next == '\n') {
+            return;
+        }/* if */
     }/* for */
 }

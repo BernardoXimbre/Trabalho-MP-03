@@ -11,6 +11,10 @@ TEST(ABERTURA_ARQUIVO, arquivo_inexistente) {
     char name[]="arquivo_inexistente.cpp";
     ASSERT_EQ(-1, Nline(name));
 }
+TEST(QUANTIDADE_DE_LINHAS, apenas_linhas_em_branco) {
+    char name[]="apenas_linhas_em_branco.cpp";
+    ASSERT_EQ(0, Nline(name));
+}
 TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_asterisco) {
     char name[]="apenas_comentarios_barra_asterisco.cpp";
     ASSERT_EQ(0, Nline(name));
