@@ -1,4 +1,3 @@
-// "Copyright [2018] <Copyright Owner>"  [legal/copyright]
 /***************************************************************************
 * Função: Contar numero de linhas de arquivo C++
 * Descrição
@@ -13,3 +12,10 @@
 * Assertiva de entrada
 *   nome_programa == String
 ***************************************************************************/
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!";
+    return 0;
+}
