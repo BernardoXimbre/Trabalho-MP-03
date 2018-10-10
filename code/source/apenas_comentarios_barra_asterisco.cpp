@@ -11,12 +11,4 @@
 *   retorna n   o programa possuir linhas válidas.
 * Assertiva de entrada
 *   nome_programa == String
-***************************************************************************/
-
-        #include <iostream>
-        using namespace std;
-
-        int main() {
-            cout << "Hello, World!";
-            return 0;
-        }
+***************************************************************************/teste

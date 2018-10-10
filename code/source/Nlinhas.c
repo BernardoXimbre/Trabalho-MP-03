@@ -31,13 +31,9 @@ int Nline(char nome_programa[]) {
         return -1;
     }/* if */
 
-    for (char_next = fgetc(file); char_next != EOF; char_next = fgetc(file)) {
-        if (char_next = '/') {
-            if ((char_next = fgetc(file)) == '*') {
-         fseek (file, Comentario_Barra_Asterisco(file)*sizeof(char), SEEK_CUR);
-            }
-        }
-        fseek (file, Espaco_em_branco(file)*sizeof(char), SEEK_CUR);
+    for (char_next = '0'; char_next != EOF; char_next = fgetc(file)) {
+        Comentario_Barra_Asterisco(file);
+        // Espaco_em_branco(file);
     }/* for */
 
     fclose(file);
@@ -79,25 +75,23 @@ int Espaco_em_branco(FILE* file) {
 * Parâmetros
 *   file - ponteiro do tipo FILE.
 * Valor retornado
-*   retorna int
+*   retorna void
 * Assertiva de entrada
 *   nome_arquivo == file
 * Assertiva de saída
-*   retorna um inteiro que o numero de caracteres até o fim do comentário.
+*   retorna uma nova posiçao do ponteiro file onde acaba o comentario.
 ****************************************************************************/ 
-int Comentario_Barra_Asterisco(FILE* file) {
+void Comentario_Barra_Asterisco(FILE* file) {
     char char_next, char_back;
-    int n_coment = 0;
 
     if ((char_next = fgetc(file)) == '/') {
         if ((char_next = fgetc(file)) == '*') {
-            for (n_coment = 2; ; char_next = fgetc(file) , n_coment++) {
-                if (char_next == '/' && char_back == '*') {
+            for (char_back = '0'; ; char_next = fgetc(file)) {
+                if (char_back == '*' && char_next == '/') {
                     break;
                 }
                 char_back = char_next;
             }/* for */
         }/* if */
     }/* if */
-    return n_coment;
 }
