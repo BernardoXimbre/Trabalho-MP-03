@@ -13,23 +13,25 @@ TEST(ABERTURA_ARQUIVO, arquivo_inexistente) {
 }
 TEST(QUANTIDADE_DE_LINHAS, apenas_linhas_em_branco) {
     char name[]="apenas_linhas_em_branco.cpp";
-    ASSERT_EQ(1, Nline(name));
+    ASSERT_EQ(0, Nline(name));
 }
 TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_asterisco) {
     char name[]="apenas_comentarios_barra_asterisco.cpp";
-    ASSERT_EQ(1, Nline(name));
+    ASSERT_EQ(0, Nline(name));
 }
 TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_barra) {
     char name[]="apenas_comentarios_barra_barra.cpp";
-    ASSERT_EQ(1, Nline(name));
+    ASSERT_EQ(0, Nline(name));
 }
-
 TEST(QUANTIDADE_DE_LINHAS_Nlinhas, comentarios_diversos) {
     char name[]="comentarios_diversos.cpp";
-    ASSERT_EQ(8, Nline(name));
+    ASSERT_EQ(7, Nline(name));
 }
-/*
-TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, comentarios_diversificados) {
+TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Testa_linhas) {
     char name[]="Testa_Nlinhas.c";
-    ASSERT_EQ(27, Nline(name));
-}*/
+    ASSERT_EQ(34, Nline(name));
+}
+TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Nlinhas) {
+    char name[]="Nlinhas.c";
+    ASSERT_EQ(46, Nline(name));
+}

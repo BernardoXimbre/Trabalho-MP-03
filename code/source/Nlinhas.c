@@ -25,47 +25,26 @@
 ****************************************************************************/ 
 int Nline(char nome_programa[]) {
     FILE *file;
-    int n_line = 1;
+    int n_line = 0;
     char char_next, char_back;
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
     char_next = fgetc(file);
     char_back = char_next;
-    for (; char_next != EOF; char_back = char_next, char_next = fgetc(file)) {
-        if (char_back == '\n' && char_next != '\n') {
-            n_line+=1;
-        } else if (char_back == '\n' && char_next == '\n') {
-            Espaco_em_branco(file);
-        } else if (char_back == '/' && char_next == '*') {
+    for (; char_next != EOF; char_next = fgetc(file)) {
+        if (char_back == '/' && char_next == '*') {
             Comentario_Barra_Asterisco(file);
         } else if (char_back == '/' && char_next == '/') {
             Comentario_Barra_Barra(file);
         }
+        if (char_back == '\n' && char_next != '\n') {
+            n_line += 1;
+        }
+        char_back = char_next;
     }
     fclose(file);
     return n_line;
-}
-/***************************************************************************
-* Função: Espaco_em_branco
-* Descrição
-*   Lê uma linha até encontrar um caractere diferente de ' '.
-* Parâmetros
-*   file - ponteiro do tipo FILE.
-* Valor retornado
-*   retorna void
-* Assertiva de entrada
-*   nome_arquivo == file
-* Assertiva de saída
-*   retorna uma nova posiçao do ponteiro file onde acaba a linha em branco.
-****************************************************************************/ 
-void Espaco_em_branco(FILE* file) {
-    char char_next;
-    for (char_next = fgetc(file); ; char_next = fgetc(file)) {
-        if (char_next != ' ' && char_next != '\n') {
-            return;
-        }/* if */
-    }/* for */
 }
 /***************************************************************************
 * Função: Comentario_Barra_Asterisco
