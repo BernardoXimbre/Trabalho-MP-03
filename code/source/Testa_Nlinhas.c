@@ -23,9 +23,9 @@ TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_barra) {
     char name[]="apenas_comentarios_barra_barra.cpp";
     ASSERT_EQ(0, Nline(name));
 }
-TEST(QUANTIDADE_DE_LINHAS_Nlinhas, comentarios_diversos) {
+TEST(QUANTIDADE_DE_LINHAS_LINHAS, comentarios_diversos) {
     char name[]="comentarios_diversos.cpp";
-    ASSERT_EQ(7, Nline(name));
+    ASSERT_EQ(8, Nline(name));
 }
 TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Testa_linhas) {
     char name[]="Testa_Nlinhas.c";
@@ -33,5 +33,5 @@ TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Testa_linhas) {
 }
 TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Nlinhas) {
     char name[]="Nlinhas.c";
-    ASSERT_EQ(46, Nline(name));
+    ASSERT_EQ(47, Nline(name));
 }

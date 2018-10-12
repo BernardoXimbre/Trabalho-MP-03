@@ -25,26 +25,30 @@
 ****************************************************************************/ 
 int Nline(char nome_programa[]) {
     FILE *file;
-    int n_line = 0;
-    char char_next, char_back;
+    int n_line = 1;
+    char char_next;
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-    char_next = fgetc(file);
-    char_back = char_next;
-    for (; char_next != EOF; char_next = fgetc(file)) {
-        if (char_back == '/' && char_next == '*') {
-            Comentario_Barra_Asterisco(file);
-        } else if (char_back == '/' && char_next == '/') {
-            Comentario_Barra_Barra(file);
+    for (char_next = fgetc(file); char_next != EOF;) {
+        if (char_next != ' ' && char_next != '\n') {
+            if (char_next != '/') {
+                do {
+                    char_next = fgetc(file);
+                } while (char_next != '\n' && char_next != EOF);
+                n_line += 1;
+            } else {
+                if ((char_next = fgetc(file)) == '*') {
+                    Comentario_Barra_Asterisco(file);
+                } else {
+                    Comentario_Barra_Barra(file);
+                }
+            }
         }
-        if (char_back == '\n' && char_next != '\n') {
-            n_line += 1;
-        }
-        char_back = char_next;
+        char_next = fgetc(file);
     }
     fclose(file);
-    return n_line;
+    return n_line-1;
 }
 /***************************************************************************
 * Função: Comentario_Barra_Asterisco
@@ -85,7 +89,7 @@ void Comentario_Barra_Barra(FILE* file) {
     char char_next;
     for (char_next = fgetc(file); ; char_next = fgetc(file)) {
         if (char_next == '\n') {
-            return;
+            break;
         }/* if */
     }/* for */
 }
