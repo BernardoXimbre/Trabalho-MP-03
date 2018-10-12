@@ -15,12 +15,12 @@
 *   retorna -1 quando não for possível abrir arquivo.
 *   retorna 0  quando  o programa NÃO possuir linhas válidas.
 *   retorna n   o programa possuir linhas válidas.
+*
 * Assertiva de entrada
 *   nome_programa == String
-*   nome_programa == "Nlinhas.c"
 * Assertiva de saída
 *   numero_linhas == -1
-*   numero_linhas == -0
+*   numero_linhas == 0
 *   numero_linhas == n 
 ****************************************************************************/ 
 int Nline(char nome_programa[]) {
@@ -30,7 +30,8 @@ int Nline(char nome_programa[]) {
     if (!(file = fopen(nome_programa, "r"))) {
         return -1;
     }/* if */
-    for (char_next = fgetc(file); char_next != EOF;) {
+    char_next = fgetc(file);
+    for (; char_next != EOF; char_next = fgetc(file)) {
         if (char_next != ' ' && char_next != '\n') {
             if (char_next != '/') {
                 do {
@@ -45,7 +46,6 @@ int Nline(char nome_programa[]) {
                 }
             }
         }
-        char_next = fgetc(file);
     }
     fclose(file);
     return n_line-1;

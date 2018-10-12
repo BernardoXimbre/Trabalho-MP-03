@@ -1,0 +1,39 @@
+        -:    0:Source:Testa_Nlinhas.c
+        -:    0:Programs:2
+        -:    1:// "Copyright [2018] <Copyright Owner>"  [legal/copyright]
+        -:    2:
+        -:    3:#include "gtest/gtest.h"
+        -:    4:#include "Nlinhas.h"
+        -:    5:
+        1:    6:int main(int argc, char **argv) {
+        1:    7:::testing::InitGoogleTest(&argc, argv);
+        1:    8:    return RUN_ALL_TESTS();
+        -:    9:}
+        5:   10:TEST(ABERTURA_ARQUIVO, arquivo_inexistente) {
+        1:   11:    char name[]="arquivo_inexistente.cpp";
+        1:   12:    ASSERT_EQ(-1, Nline(name));
+        -:   13:}
+        5:   14:TEST(QUANTIDADE_DE_LINHAS, apenas_linhas_em_branco) {
+        1:   15:    char name[]="apenas_linhas_em_branco.cpp";
+        1:   16:    ASSERT_EQ(0, Nline(name));
+        -:   17:}
+        5:   18:TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_asterisco) {
+        1:   19:    char name[]="apenas_comentarios_barra_asterisco.cpp";
+        1:   20:    ASSERT_EQ(0, Nline(name));
+        -:   21:}
+        5:   22:TEST(QUANTIDADE_DE_LINHAS, apenas_comentarios_barra_barra) {
+        1:   23:    char name[]="apenas_comentarios_barra_barra.cpp";
+        1:   24:    ASSERT_EQ(0, Nline(name));
+        -:   25:}
+        5:   26:TEST(QUANTIDADE_DE_LINHAS_LINHAS, comentarios_diversos) {
+        1:   27:    char name[]="comentarios_diversos.cpp";
+        1:   28:    ASSERT_EQ(8, Nline(name));
+        -:   29:}
+        5:   30:TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Testa_linhas) {
+        1:   31:    char name[]="Testa_Nlinhas.c";
+        1:   32:    ASSERT_EQ(34, Nline(name));
+        -:   33:}
+        5:   34:TEST(QUANTIDADE_DE_LINHAS_Testa_Nlinhas, Nlinhas) {
+        1:   35:    char name[]="Nlinhas.c";
+        1:   36:    ASSERT_EQ(47, Nline(name));
+        3:   37:}

@@ -1,0 +1,97 @@
+        -:    0:Source:Nlinhas.c
+        -:    0:Programs:2
+        -:    1:// "Copyright [2018] <Copyright Owner>"  [legal/copyright]
+        -:    2:
+        -:    3:#include <stdlib.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include "Nlinhas.h"
+        -:    6:
+        -:    7:/***************************************************************************
+        -:    8:* Função: Contar numero de linhas de arquivo C++
+        -:    9:* Descrição
+        -:   10:*   Conta o numero de linhas do arquivo em C++.
+        -:   11:*   Comentarios e linhas em branco não contam.
+        -:   12:* Parâmetros
+        -:   13:*   nome_programa - nome do arquivo que será aberto.
+        -:   14:* Valor retornado
+        -:   15:*   retorna -1 quando não for possível abrir arquivo.
+        -:   16:*   retorna 0  quando  o programa NÃO possuir linhas válidas.
+        -:   17:*   retorna n   o programa possuir linhas válidas.
+        -:   18:*
+        -:   19:* Assertiva de entrada
+        -:   20:*   nome_programa == String
+        -:   21:* Assertiva de saída
+        -:   22:*   numero_linhas == -1
+        -:   23:*   numero_linhas == 0
+        -:   24:*   numero_linhas == n 
+        -:   25:****************************************************************************/ 
+        7:   26:int Nline(char nome_programa[]) {
+        -:   27:    FILE *file;
+        7:   28:    int n_line = 1;
+        -:   29:    char char_next;
+        7:   30:    if (!(file = fopen(nome_programa, "r"))) {
+        1:   31:        return -1;
+        -:   32:    }/* if */
+        6:   33:    char_next = fgetc(file);
+     1130:   34:    for (; char_next != EOF; char_next = fgetc(file)) {
+      562:   35:        if (char_next != ' ' && char_next != '\n') {
+      112:   36:            if (char_next != '/') {
+     2025:   37:                do {
+     2114:   38:                    char_next = fgetc(file);
+     2114:   39:                } while (char_next != '\n' && char_next != EOF);
+       89:   40:                n_line += 1;
+        -:   41:            } else {
+       23:   42:                if ((char_next = fgetc(file)) == '*') {
+        6:   43:                    Comentario_Barra_Asterisco(file);
+        -:   44:                } else {
+       17:   45:                    Comentario_Barra_Barra(file);
+        -:   46:                }
+        -:   47:            }
+        -:   48:        }
+        -:   49:    }
+        6:   50:    fclose(file);
+        6:   51:    return n_line-1;
+        -:   52:}
+        -:   53:/***************************************************************************
+        -:   54:* Função: Comentario_Barra_Asterisco
+        -:   55:* Descrição
+        -:   56:*   Lê um comentário do tipo /* do arquivo até o final do comentário.
+        -:   57:* Parâmetros
+        -:   58:*   file - ponteiro do tipo FILE.
+        -:   59:* Valor retornado
+        -:   60:*   retorna void
+        -:   61:* Assertiva de entrada
+        -:   62:*   nome_arquivo == file
+        -:   63:* Assertiva de saída
+        -:   64:*   retorna uma nova posiçao do ponteiro file onde acaba o comentario.
+        -:   65:****************************************************************************/ 
+        6:   66:void Comentario_Barra_Asterisco(FILE* file) {
+        -:   67:    char char_next, char_back;
+     2384:   68:    for (char_back = '0', char_next = fgetc(file); ; char_next = fgetc(file)) {
+     4762:   69:        if (char_back == '*' && char_next == '/') {
+        6:   70:            break;
+        -:   71:        }
+     2378:   72:        char_back = char_next;
+        -:   73:    }/* for */
+        6:   74:}
+        -:   75:/***************************************************************************
+        -:   76:* Função: Comentario_Barra_Barra
+        -:   77:* Descrição
+        -:   78:*   Lê um comentário do tipo // do arquivo até o final da linha.
+        -:   79:* Parâmetros
+        -:   80:*   file - ponteiro do tipo FILE.
+        -:   81:* Valor retornado
+        -:   82:*   retorna void
+        -:   83:* Assertiva de entrada
+        -:   84:*   nome_arquivo == file
+        -:   85:* Assertiva de saída
+        -:   86:*   retorna uma nova posiçao do ponteiro file onde acaba a linha.
+        -:   87:****************************************************************************/ 
+       17:   88:void Comentario_Barra_Barra(FILE* file) {
+        -:   89:    char char_next;
+      750:   90:    for (char_next = fgetc(file); ; char_next = fgetc(file)) {
+     1483:   91:        if (char_next == '\n') {
+       17:   92:            break;
+        -:   93:        }/* if */
+        -:   94:    }/* for */
+       17:   95:}
